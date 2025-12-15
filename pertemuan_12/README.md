@@ -16,4 +16,4 @@ Proyek ini mendemonstrasikan implementasi prinsip SOLID (SRP, OCP, DIP) pada sis
    ```
 
 # Histori Perubaha (Log)
-Kode dikelola menggunakan Git. Lihat 
+Kode dikelola menggunakan Git. Lihat https://github.com/AlanCihuy/PBO_Semester_3/tree/main/pertemuan_12
