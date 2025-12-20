@@ -10,11 +10,9 @@ refactoring SOLID pada sistem booking hotel dengan:
 - Penggunaan Logging (INFO & WARNING)
 ====================================================
 """
-
 import logging
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-
 # ==================================================
 # LOGGING CONFIGURATION
 # ==================================================
@@ -23,8 +21,6 @@ logging.basicConfig(
     format="%(levelname)s:%(name)s:%(message)s"
 )
 logger = logging.getLogger(__name__)
-
-
 # ==================================================
 # MODEL
 # ==================================================
@@ -41,8 +37,6 @@ class Booking:
     customer_name: str
     room_type: str
     status: str = "pending"
-
-
 # ==================================================
 # ABSTRAKSI (INTERFACE)
 # ==================================================
@@ -63,8 +57,6 @@ class IRoomValidator(ABC):
             bool: True jika kamar valid, False jika tidak.
         """
         pass
-
-
 class IPaymentProcessor(ABC):
     """
     Interface untuk pemrosesan pembayaran.
@@ -82,8 +74,6 @@ class IPaymentProcessor(ABC):
             bool: True jika pembayaran berhasil.
         """
         pass
-
-
 class INotificationService(ABC):
     """
     Interface untuk layanan notifikasi.
@@ -98,8 +88,6 @@ class INotificationService(ABC):
             booking (Booking): Data booking.
         """
         pass
-
-
 # ==================================================
 # IMPLEMENTASI RULE & SERVICE
 # ==================================================
@@ -107,14 +95,11 @@ class RoomValidator(IRoomValidator):
     """
     Rule validasi kamar hotel.
     """
-
     def validate(self, booking: Booking) -> bool:
         """
         Mengecek apakah kamar tersedia.
-
         Args:
             booking (Booking): Data booking.
-
         Returns:
             bool: Status validasi kamar.
         """
@@ -124,13 +109,10 @@ class RoomValidator(IRoomValidator):
 
         logger.warning("Kamar %s tidak tersedia.", booking.room_type)
         return False
-
-
 class CreditCardPayment(IPaymentProcessor):
     """
     Pembayaran menggunakan Credit Card.
     """
-
     def process(self, booking: Booking) -> bool:
         """
         Memproses pembayaran credit card.
@@ -143,13 +125,10 @@ class CreditCardPayment(IPaymentProcessor):
         """
         logger.info("Memproses pembayaran Credit Card untuk %s.", booking.customer_name)
         return True
-
-
 class EmailNotification(INotificationService):
     """
     Notifikasi booking melalui email.
     """
-
     def send(self, booking: Booking):
         """
         Mengirim email konfirmasi booking.
@@ -158,8 +137,6 @@ class EmailNotification(INotificationService):
             booking (Booking): Data booking.
         """
         logger.info("Email konfirmasi dikirim ke %s.", booking.customer_name)
-
-
 # ==================================================
 # SERVICE UTAMA (Seperti RegistrationService)
 # ==================================================
@@ -210,8 +187,6 @@ class BookingService:
 
         logger.warning("Booking gagal pada tahap pembayaran.")
         return False
-
-
 # ==================================================
 # PROGRAM UTAMA
 # ==================================================
