@@ -194,7 +194,6 @@ if __name__ == "__main__":
     validator = RoomValidator()
     payment = CreditCardPayment()
     notifier = EmailNotification()
-
     booking = Booking("Andi", "deluxe")
     service = BookingService(validator, payment, notifier)
     service.book(booking)
